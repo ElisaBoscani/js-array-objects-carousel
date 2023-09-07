@@ -61,12 +61,12 @@ startEl.addEventListener("click", function () {
 stopEl.addEventListener("click", function () {
   stopScroll();
 });
-
+let imgScroll;
 function startScroll() {
-  setInterval(() => {
+  imgScroll = setInterval(() => {
     upImg();
   }, 2000);
 }
 function stopScroll() {
-  clearInterval(startScroll());
+  clearInterval(imgScroll);
 }
