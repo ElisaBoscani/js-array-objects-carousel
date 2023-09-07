@@ -8,12 +8,10 @@ const images = [
 const containerEl = document.getElementById("container_img");
 const upEl = document.getElementById("up");
 const downEl = document.getElementById("down");
-
+const startEl = document.getElementById("start");
+const stopEl = document.getElementById("stop");
 let scroll = 0;
-/* images.forEach(
-  (image) =>
-    (containerEl.innerHTML += ` <img src="${image.img === i}" alt=""   /> `)
-); */
+
 images.forEach(function (image) {
   containerEl.innerHTML += ` <img src="${image.img}" alt="" class="d_none"  /> `;
 });
@@ -22,15 +20,53 @@ imgEl[0].classList.remove("d_none");
 console.log(imgEl);
 
 upEl.addEventListener("click", function () {
+  upImg();
+});
+
+downEl.addEventListener("click", function () {
+  downImg();
+});
+//creare lo scroll delle immagini
+function upImg() {
   const changeImg = imgEl[scroll];
+  changeImg.classList.toggle("d_none");
   if (scroll === images.length - 1) {
     scroll = 0;
   } else {
     scroll++;
   }
 
-  changeImg.classList.toggle("d_none");
   const nextSlide = imgEl[scroll];
   console.log(nextSlide);
   nextSlide.classList.toggle("d_none");
+}
+function downImg() {
+  const changeImg = imgEl[scroll];
+  changeImg.classList.toggle("d_none");
+  if (scroll === 0) {
+    scroll = images.length - 1;
+  } else {
+    scroll--;
+  }
+
+  const nextSlide = imgEl[scroll];
+  console.log(nextSlide);
+  nextSlide.classList.toggle("d_none");
+}
+//bottoni intervallo
+startEl.addEventListener("click", function () {
+  startScroll();
 });
+
+stopEl.addEventListener("click", function () {
+  stopScroll();
+});
+
+function startScroll() {
+  setInterval(() => {
+    upImg();
+  }, 2000);
+}
+function stopScroll() {
+  clearInterval(startScroll());
+}
