@@ -8,9 +8,29 @@ const images = [
 const containerEl = document.getElementById("container_img");
 const upEl = document.getElementById("up");
 const downEl = document.getElementById("down");
-let scroll = 0;
-images.forEach(
-  (image) => (containerEl.innerHTML += ` <img src="${image.img}" alt=""   /> `)
-);
 
-upEl.addEventListener("click", function () {});
+let scroll = 0;
+/* images.forEach(
+  (image) =>
+    (containerEl.innerHTML += ` <img src="${image.img === i}" alt=""   /> `)
+); */
+images.forEach(function (image) {
+  containerEl.innerHTML += ` <img src="${image.img}" alt="" class="d_none"  /> `;
+});
+const imgEl = document.querySelectorAll(".d_none");
+imgEl[0].classList.remove("d_none");
+console.log(imgEl);
+
+upEl.addEventListener("click", function () {
+  const changeImg = imgEl[scroll];
+  if (scroll === images.length - 1) {
+    scroll = 0;
+  } else {
+    scroll++;
+  }
+
+  changeImg.classList.toggle("d_none");
+  const nextSlide = imgEl[scroll];
+  console.log(nextSlide);
+  nextSlide.classList.toggle("d_none");
+});
